@@ -1,0 +1,61 @@
+---
+  import { navLinks1, navLinks2 } from '../navs/dataMenu'
+---
+
+<script>
+  // Aplicar estilos al hover del header
+  const header = document.querySelector('header')
+  header?.addEventListener('mouseleave', () => {
+    header.classList.add('bg-transparent', 'text-gray-300')
+    header.classList.remove('bg-white', 'text-blue-500')
+  })
+  header?.addEventListener('mouseover', () => {
+    header.classList.add('bg-white', 'text-blue-500')
+    header.classList.remove('bg-transparent', 'text-gray-300')
+  })
+  // Fin de los estilos del hover
+
+  // Mostrando submenu al hover de nav2
+  let indexMenu
+  const menuItems = document.querySelectorAll('button')
+  menuItems.forEach((item, i) => (
+    item.addEventListener('mouseover', () => {
+      console.log(i)
+      return indexMenu = i
+    })
+  ))
+  
+</script>
+
+
+<header class={`py-4 px-5 w-full mx-auto z-10 absolute top-0 left-0 text-gray-300 flex flex-col gap-3`}>
+  <nav class="flex gap-3">
+    <div class="flex gap-3 items-center  hover:font-bold hover:cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="26" height="26" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill=""/>
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+      </svg>
+      <a href="/login">Employee Login</a>
+    </div>
+    <div class="flex gap-3">
+      {
+        navLinks1.map((link,indice) => (
+          <a  href={link.path} class="hover:font-bold">{link.label}</a>
+        ))
+      }
+    </div>
+  </nav>
+  <nav class='flex gap-3'>
+    <img src='/media/logotipo.webp' class='w-40 h-auto' />
+    {
+      navLinks2.map((link, indice) => (
+        <button class="dropdown px-2 py-1 bg-transparent rounded  font-bold hover:bg-blue-500 hover:text-white">
+          {link.name}
+        </button>
+        
+      ))
+    }
+  </nav>
+</header>
